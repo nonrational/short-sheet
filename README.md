@@ -1,4 +1,4 @@
-# shortcut-repl
+# ShortSheet
 
 A REPL wrapper for [Shortcut](https://shortcut.com/) and [Google Workspace](https://workspace.google.com/) to help product and project management.
 
