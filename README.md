@@ -6,9 +6,22 @@ A REPL environment and Rake tasks to synchronize [Shortcut](https://shortcut.com
 
 This project provides customization and automation that sits on top of Shortcut to provide a more flexible and powerful planning experience. Google Sheets is familiar and flexible. A central "planning sheet" can then be a staging area to prioritize and organize initiatives before they're pushed into Shortcut.
 
-### Story to Epic Evolution
+![A screenshot of a Google Sheet with columns A-K, including Name (with initiative names blurred out), Doc, Shortcut, Owner, Urgency, Status, Begin, Target, Start, End. The 'Begin' and 'End' columns show values like 'Nov H1 '24' and 'Feb H2 '25' (iteration names) and the resulting Start/End calendar dates are shown in columns to the right. The Target column has the funnel icon highlighted, indicated that the column is filtered.](https://raw.githubusercontent.com/nonrational/short-sheet/refs/heads/main/static/annotated_google_sheet_screenshot.png)
+
+
+### (1) Iteration-Bound Delivery
+
+Rather than needing to think in target _dates_, we've found it helpful to think in target _iterations_. Our planning sheet automatically translates canonical iteration names with start/end dates, so we can plan talking about iterations, then push the resulting dates into Shortcut epics.
+
+### (2) Story to Epic Evolution
 
 When we consider a new initiative, it usually starts as a "Scoping" story in Shortcut. That story represents discovery and definition of the initiative. After scoping is complete, we'll make a go/no-go decision. If we decide not to proceed right now, having an Epic sitting in the hopper is confusing. So, the Sheet view allows us to prioritize Epics _alongside Stories_. The Sheet order can then be pushed into Shortcut.
+
+### (3) Obvious Filtering
+
+Using Google Sheet's column filtering criteria is more intuitive for those less familiar with Shortcut.
+
+<div style="margin-bottom: 180px;"></div>
 
 ## Feature Summary
 
@@ -41,6 +54,7 @@ rake planning:update_sheet           # Fetch information from shortcut and updat
 
 rake shortcut:iteration:create_next  # Create the next iteration
 rake shortcut:project_sync:run       # Ensure that all stories with a project have the correct product area set
+
 ```
 ### Scheduling
 
