@@ -1,6 +1,12 @@
 .env
+
 *.csv
+*.xls
+*.xlsx
+*.xlsm # macro-enabled
+*.json
+
+~$*
 .rake_tasks~
 config.yml
-*.json
 /templates/*.md
