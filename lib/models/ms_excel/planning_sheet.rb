@@ -111,9 +111,8 @@ class MsExcel::PlanningSheet
         MsExcel::SheetInitiative.new(
           row_data: row,
           row_index: idx + 2,
-          spreadsheet_id: spreadsheet_id,
-          spreadsheet_range: spreadsheet_range,
-          sheet_name: sheet_name
+          workbook_path: @file_path,
+          worksheet_name: sheet_name
         )
       end
     end

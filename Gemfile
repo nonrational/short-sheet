@@ -17,6 +17,7 @@ gem "google-apis-sheets_v4"
 
 # Excel Spreadsheet Support
 gem "roo", "~> 2.10.0"
+gem "roo-xls", "~> 1.2.0"
 
 # required to serve the oauth endpoints
 gem "rackup", "~> 2.2"
