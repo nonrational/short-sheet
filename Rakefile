@@ -21,19 +21,19 @@ load_paths!
 namespace :planning do
   desc "Fetch information from shortcut and update the sheet with it"
   task :update_sheet do
-    PlanningSheet.new.download!
+    GoogleWorkspace::PlanningSheet.new.download!
   end
 
   desc "Interactively review any out-of-sync initiatives and choose whether to update shortcut or the sheet"
   task :review do
-    PlanningSheet.new.upload_interactive
+    GoogleWorkspace::PlanningSheet.new.upload_interactive
   end
 
   desc "Sort epics by sheet order and ready stories by priority"
   task :prioritize_shortcut do
     puts "Sorting epics by planning sheet order..."
     # ensure that the priority order reflected in the planning sheet is respected
-    PlanningSheet.new.push_sheet_order_to_shortcut!
+    GoogleWorkspace::PlanningSheet.new.push_sheet_order_to_shortcut!
     # then sort all the "ready" cards in the current iteration
     puts "Sorting ready stories by priority..."
     IterationReadySort.new.run
@@ -43,7 +43,7 @@ end
 namespace :monthly_chores do
   desc "Create the next monthly chores epic"
   task :create_current do
-    NextMonthlyChoresSheet.new(as_of: 1.month.ago).tap do |sheet|
+    GoogleWorkspace::NextMonthlyChoresSheet.new(as_of: 1.month.ago).tap do |sheet|
       print "Creating #{sheet.next_epic_name}. Proceed? yes/[no]: "
       result = $stdin.gets
       sheet.create_next_epic if /ye?s?/i.match?(result)
@@ -52,7 +52,7 @@ namespace :monthly_chores do
 
   desc "Create the next monthly chores epic"
   task :create_next do
-    NextMonthlyChoresSheet.new.tap do |sheet|
+    GoogleWorkspace::NextMonthlyChoresSheet.new.tap do |sheet|
       print "Creating #{sheet.next_epic_name}. Proceed? yes/[no]: "
       result = $stdin.gets
       sheet.create_next_epic if /ye?s?/i.match?(result)

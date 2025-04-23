@@ -5,7 +5,7 @@ require "tempfile"
 # This represents the entire planning sheet, and is comprised of many
 # initiatives, which represent the rows in the sheet. Each initiative
 # may have a corresponding epic or story in Shortcut.
-class PlanningSheet
+class GoogleWorkspace::PlanningSheet
   def current_epic_initiatives
     # TODO: Update `story?` rows as well.
     initiatives.filter(&:epic?).reject do |i|
@@ -41,8 +41,7 @@ class PlanningSheet
 
   def download_as_xlsx
     file_id = spreadsheet_id
-    file = drive_v3.export_file(file_id, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", download_dest: "#{file_id}.xlsx")
-    puts "Spreadsheet downloaded as #{file.name}"
+    drive_v3.export_file(file_id, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", download_dest: "planning_sheet.xlsx")
   end
 
   def upload_interactive
@@ -115,7 +114,7 @@ class PlanningSheet
   def raw_initiatives
     @raw_initiatives ||= begin
       sheet.data[0].row_data.drop(1).map.with_index do |row, idx|
-        SheetInitiative.new(
+        GoogleWorkspace::SheetInitiative.new(
           row_data: row,
           row_index: idx + 2, # google sheets use 1-based numbering, and we dropped the index.
           spreadsheet_id: spreadsheet_id,
@@ -145,7 +144,7 @@ class PlanningSheet
   end
 
   def to_s
-    "PlanningSheet[#{spreadsheet_id}]"
+    "GoogleWorkspace::PlanningSheet[#{spreadsheet_id}]"
   end
 
   def spreadsheet

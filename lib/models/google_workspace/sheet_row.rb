@@ -1,4 +1,4 @@
-class SheetRow
+class GoogleWorkspace::SheetRow
   include ActiveModel::Model
   attr_accessor :spreadsheet_id, :row_data, :row_index, :sheet_name
 

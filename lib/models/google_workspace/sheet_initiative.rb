@@ -1,6 +1,6 @@
 # An initiative represents a line-item in a planning
 # sheet and a corresponding shortcut epic (or story).
-class SheetInitiative
+class GoogleWorkspace::SheetInitiative
   include ActiveModel::Model
   attr_accessor :row_data, :row_index, :spreadsheet_id, :spreadsheet_range, :sheet_name
 
@@ -152,7 +152,7 @@ class SheetInitiative
   end
 
   def row
-    @row ||= SheetRow.new(
+    @row ||= GoogleWorkspace::SheetRow.new(
       spreadsheet_id: spreadsheet_id,
       row_data: row_data,
       row_index: row_index,

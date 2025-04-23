@@ -1,6 +1,6 @@
 require "google/apis/sheets_v4"
 
-class NextMonthlyChoresSheet
+class GoogleWorkspace::NextMonthlyChoresSheet
   include ActiveModel::Model
 
   # By default, this will create chores for the _next_ month,
