@@ -25,8 +25,12 @@ namespace :planning do
   end
 
   desc "Interactively review any out-of-sync initiatives and choose whether to update shortcut or the sheet"
-  task :review do
+  task :review_sheet do
     GoogleWorkspace::PlanningSheet.new.upload_interactive
+  end
+
+  task :review_xls do
+    MsExcel::PlanningSheet.new.upload_interactive
   end
 
   desc "Sort epics by sheet order and ready stories by priority"

@@ -1,11 +1,19 @@
 require "roo"
 require "roo-xls"
 require "tempfile"
+require "spreadsheet"
 
 class MsExcel::PlanningSheet
-  def initialize(file_path)
-    @file_path = file_path
-    @spreadsheet = Roo::Spreadsheet.open(file_path)
+  def initialize(path = nil)
+    @file_path = path || ::Scrb.fetch_config!("planning-sheet-path")
+  end
+
+  def open
+    Spreadsheet.client_encoding = "UTF-8"
+    book = Spreadsheet.open(@file_path)
+    sheet = book.worksheets(0)
+
+    binding.pry
   end
 
   def current_epic_initiatives
@@ -74,13 +82,6 @@ class MsExcel::PlanningSheet
     binding.pry
   end
 
-  def organize_documents!
-    initiatives.map do |i|
-      puts i
-      i.move_document_to_correct_drive_location
-    end
-  end
-
   def push_sheet_order_to_shortcut!
     initiatives.each_cons(2) do |before, after|
       puts "#{before.epic.name}(#{before.row_index}) is before #{after.epic.name}(#{after.row_index})"
@@ -118,8 +119,12 @@ class MsExcel::PlanningSheet
     end
   end
 
+  def spreadsheet
+    @spreadsheet ||= Roo::Spreadsheet.open(@file_path)
+  end
+
   def sheet
-    @sheet ||= @spreadsheet.sheet(0)
+    @sheet ||= spreadsheet.sheet(0)
   end
 
   def last_modified_at

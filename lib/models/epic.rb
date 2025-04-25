@@ -1,3 +1,5 @@
+require "active_support/core_ext/time/zones"
+
 class Epic
   include ActiveModel::Model
 

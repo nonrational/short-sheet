@@ -174,8 +174,8 @@ class MsExcel::SheetInitiative
       ["URL", "", epic.app_url],
       ["Name", row.name, epic.name],
       ["Status", row.status, epic.workflow_state.name],
-      ["Start", row.start_date&.to_date&.iso8601, epic.planned_starts_at&.to_date&.iso8601],
-      ["Target", row.target_date&.to_date&.iso8601, epic.planned_ends_at&.to_date&.iso8601]
+      ["Start", row.start_date&.iso8601, epic.planned_starts_at&.to_date&.iso8601],
+      ["Target", row.target_date&.iso8601, epic.planned_ends_at&.to_date&.iso8601]
     ]
   end
 
@@ -193,10 +193,10 @@ class MsExcel::SheetInitiative
   end
 
   def start_date_match?
-    row.start_date == epic.planned_starts_at
+    row.start_date == epic.planned_starts_at&.to_date
   end
 
   def target_date_match?
-    row.target_date == epic.planned_ends_at
+    row.target_date == epic.planned_ends_at&.to_date
   end
 end

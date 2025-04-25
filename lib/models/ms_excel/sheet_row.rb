@@ -1,3 +1,5 @@
+require "spreadsheet"
+
 # Represents a single row in an Excel worksheet.
 class MsExcel::SheetRow
   attr_accessor :workbook_path, :row_data, :row_index, :worksheet_name
@@ -34,61 +36,102 @@ class MsExcel::SheetRow
 
   # Maps attribute keys to column indices (zero-based)
   def column_mapping
-    {
-      shortcut_id: 0,
-      hyperlinked_name: 1,
-      story_completion: 2,
-      participants: 3,
-      status: 4,
-      name: 5,
-      epic_id: 6,
-      story_id: 7,
-      start_date: 8,
-      target_date: 9,
-      doctype: 10,
-      doctype_hyperlink: 11,
-      document_path: 12
-    }
+    [
+      :number,                 # A
+      :hyperlinked_name,       # B
+      :hyperlinked_doctype,    # C
+      :shortcut_id,            # D
+      :owner_name,             # E
+      :urgency,                # F
+      :status,                 # G
+      :start_iteration,        # H
+      :target_iteration,       # I
+      :start_date,             # J
+      :target_date,            # K
+      :participants,           # L
+      :story_completion,       # M
+      :notes                   # N
+    ].each_with_index.each_with_object({}) do |(key, index), hash|
+      hash[key] = index
+    end
   end
 
-  # Example attributes for the row
-  def name
-    self[:name]
+  def name_hyperlink
+    self[:hyperlinked_name]
+      &.formula
+      &.match(/HYPERLINK\("([^"]+)"/)
+      &.captures
+      &.first
   end
 
   def epic_id
-    self[:epic_id]
+    name_hyperlink&.match(/epic\/(\d+)/)&.captures&.first&.to_i
   end
 
   def story_id
-    self[:story_id]
+    name_hyperlink&.match(/story\/(\d+)/)&.captures&.first&.to_i
   end
 
-  def status
-    self[:status]
+  def number
+    self[:number].formatted_value&.to_i
   end
 
-  def start_date
-    self[:start_date]
-  end
-
-  def target_date
-    self[:target_date]
-  end
-
-  def story_completion
-    self[:story_completion]
+  def name
+    self[:hyperlinked_name].formatted_value
   end
 
   def doctype
-    self[:doctype]
+    self[:hyperlinked_doctype].formatted_value
   end
 
   def doctype_hyperlink
-    self[:doctype_hyperlink]
+    puts "[NOT SUPPORTED] MsExcel::SheetRow#doctype_hyperlink is not supported."
+    nil
   end
 
-  def document_path
-    self[:document_path]
+  def story_completion
+    self[:story_completion].formatted_value
+  end
+
+  def document_id
+    puts "[NOT SUPPORTED] MsExcel::SheetRow#document_id is not supported."
+    nil
+  end
+
+  # this could be story-xxxx or epic-xxxx
+  def shortcut_id
+    self[:shortcut_id].formatted_value
+  end
+
+  def owner_name
+    self[:owner_name].formatted_value
+  end
+
+  def urgency
+    self[:urgency].formatted_value
+  end
+
+  def status
+    self[:status].formatted_value
+  end
+
+  def start_date
+    @start_date ||= begin
+      self[:start_date].value
+    rescue
+      nil
+    end
+  end
+
+  def target_date
+    @target_date ||= begin
+      self[:target_date].value
+    rescue
+      nil
+    end
+  end
+
+  def to_s
+    "#{worksheet_name}:#{row_index}"
   end
 end
