@@ -1,20 +1,19 @@
 require "roo"
 require "roo-xls"
 require "tempfile"
-require "spreadsheet"
+# require "spreadsheet"
 
 class MsExcel::PlanningSheet
   def initialize(path = nil)
     @file_path = path || ::Scrb.fetch_config!("planning-sheet-path")
   end
 
-  def open
-    Spreadsheet.client_encoding = "UTF-8"
-    book = Spreadsheet.open(@file_path)
-    sheet = book.worksheets(0)
-
-    binding.pry
-  end
+  # def open
+  #   Spreadsheet.client_encoding = "UTF-8"
+  #   book = Spreadsheet.open(@file_path)
+  #   sheet = book.worksheets(0)
+  #   binding.pry
+  # end
 
   def current_epic_initiatives
     initiatives.filter(&:epic?).reject do |i|
@@ -108,6 +107,7 @@ class MsExcel::PlanningSheet
 
   def raw_initiatives
     @raw_initiatives ||= begin
+      binding.pry
       sheet.each_row_streaming(offset: 1).map.with_index do |row, idx|
         MsExcel::SheetInitiative.new(
           row_data: row,
