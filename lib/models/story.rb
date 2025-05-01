@@ -8,7 +8,7 @@ class Story
     :member_mention_ids, :mention_ids, :moved_at, :name, :num_tasks_completed, :owner_ids, :position, :previous_iteration_ids,
     :project_id, :pull_requests, :requested_by_id, :started, :started_at, :started_at_override, :stats, :story_links,
     :story_template_id, :story_type, :task_ids, :tasks, :updated_at, :workflow_id, :workflow_state_id, :sub_task_story_ids,
-    :parent_story_id
+    :parent_story_id, :formatted_vcs_branch_name
 
   alias_method :blocked?, :blocked
   alias_method :blocker?, :blocker
