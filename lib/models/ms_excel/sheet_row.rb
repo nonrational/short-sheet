@@ -1,4 +1,4 @@
-require "spreadsheet"
+# require "spreadsheet"
 
 # Represents a single row in an Excel worksheet.
 class MsExcel::SheetRow

@@ -107,7 +107,6 @@ class MsExcel::PlanningSheet
 
   def raw_initiatives
     @raw_initiatives ||= begin
-      binding.pry
       sheet.each_row_streaming(offset: 1).map.with_index do |row, idx|
         MsExcel::SheetInitiative.new(
           row_data: row,
@@ -120,6 +119,7 @@ class MsExcel::PlanningSheet
   end
 
   def spreadsheet
+    # This works for XLSM files, but doesn't work for older XLS files
     @spreadsheet ||= Roo::Spreadsheet.open(@file_path)
   end
 
