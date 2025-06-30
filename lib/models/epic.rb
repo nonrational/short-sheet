@@ -1,6 +1,4 @@
-class Epic
-  include ActiveModel::Model
-
+class Epic < Shortcut::Base
   class << self
     def all
       ScrbClient.get("/epics").map { |e| Epic.new(e) }

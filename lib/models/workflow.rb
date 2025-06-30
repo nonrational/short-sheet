@@ -1,6 +1,4 @@
-class Workflow
-  include ActiveModel::Model
-
+class Workflow < Shortcut::Base
   attr_accessor :description, :entity_type, :project_ids, :states, :name, :updated_at, :auto_assign_owner, :id, :team_id, :created_at, :default_state_id
 
   class << self

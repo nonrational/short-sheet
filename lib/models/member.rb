@@ -1,4 +1,4 @@
-class Member
+class Member < Shortcut::Base
   include ActiveModel::Model
   attr_accessor :created_at, :created_without_invite, :disabled, :entity_type, :global_id, :group_ids, :id, :profile, :role, :state, :updated_at
 

@@ -1,6 +1,4 @@
-class EpicWorkflow
-  include ActiveModel::Model
-
+class EpicWorkflow < Shortcut::Base
   attr_accessor :entity_type, :id, :created_at, :updated_at, :default_epic_state_id, :epic_states
 
   class << self

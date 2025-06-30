@@ -29,12 +29,13 @@ def lib_files
   path = File.expand_path("../..", __FILE__)
 
   [
-    'lib/behaviors',
-    'lib/support',
-    'lib/models',
-    'lib/models/custom_fields',
-    'lib/tasks',
-    'lib',
+    "lib/behaviors",
+    "lib/support",
+    "lib/support/shortcut",
+    "lib/models",
+    "lib/models/custom_fields",
+    "lib/tasks",
+    "lib"
   ].flat_map do |dir|
     Dir.glob("#{path}/#{dir}/*.rb")
   end

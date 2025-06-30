@@ -1,6 +1,4 @@
-class Group
-  include ActiveModel::Model
-
+class Group < Shortcut::Base
   attr_accessor :app_url, :description, :archived, :entity_type, :color, :num_stories_started,
     :mention_name, :name, :global_id, :color_key, :num_stories, :num_epics_started,
     :num_stories_backlog, :id, :display_icon, :member_ids, :workflow_ids

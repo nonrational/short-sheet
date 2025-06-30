@@ -1,6 +1,4 @@
-class Story
-  include ActiveModel::Model
-
+class Story < Shortcut::Base
   attr_accessor :app_url, :archived, :blocked, :blocker, :branches, :comment_ids, :comments, :commits, :completed,
     :completed_at, :completed_at_override, :created_at, :custom_fields, :cycle_time, :deadline, :description,
     :entity_type, :epic_id, :estimate, :external_id, :external_links, :file_ids, :files, :follower_ids, :global_id,

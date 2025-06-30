@@ -1,5 +1,4 @@
-class CustomField
-  include ActiveModel::Model
+class CustomField < Shortcut::Base
   attr_accessor :description, :entity_type, :name, :fixed_position, :updated_at, :id, :values,
     :field_type, :position, :canonical_name, :enabled, :created_at, :story_types, :icon_set_identifier
 

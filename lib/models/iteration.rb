@@ -1,4 +1,4 @@
-class Iteration
+class Iteration < Shortcut::Base
   module NextAware
     # make an iteration aware of rules about how to build the next one
 
@@ -39,7 +39,6 @@ class Iteration
   end
 
   include NextAware
-  include ActiveModel::Model
 
   attr_reader :created_at, :start_date, :end_date
   attr_accessor :app_url, :associated_groups, :description, :entity_type, :follower_ids, :global_id,

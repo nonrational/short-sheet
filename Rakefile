@@ -8,11 +8,29 @@ require "dotenv/load"
 require "awesome_print"
 
 def load_paths!
-  path = File.expand_path("..", __FILE__)
-  files = Dir.glob("#{path}/**/*.rb").sort
-  files.each do |f|
-    # puts f
+  lib_files.each do |f|
     load f
+  end
+  :ok
+end
+
+def defined_constants
+  @defined_constants ||= [].to_set
+end
+
+def lib_files
+  path = File.expand_path("..", __FILE__)
+
+  [
+    "lib/behaviors",
+    "lib/support",
+    "lib/support/shortcut",
+    "lib/models",
+    "lib/models/custom_fields",
+    "lib/tasks",
+    "lib"
+  ].flat_map do |dir|
+    Dir.glob("#{path}/#{dir}/*.rb")
   end
 end
 
