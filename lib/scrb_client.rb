@@ -3,6 +3,13 @@ require "httparty"
 class ScrbClient
   include HTTParty
 
+  default_options.update(
+    {
+      verify: true,
+      ssl_ca_file: Scrb.ssl_ca_file
+    }.compact
+  )
+
   base_uri "https://api.app.shortcut.com/api/v3"
   headers({
     "Content-Type": "application/json",

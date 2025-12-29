@@ -55,6 +55,10 @@ module Scrb
       @api_key ||= config["shortcut-api-token"] || ENV.fetch("SHORTCUT_API_TOKEN")
     end
 
+    def ssl_ca_file
+      @ssl_ca_file ||= config["ssl-ca-file"] || ENV["SSL_CA_FILE"]
+    end
+
     def config
       @config ||= begin
         if ENV["SCRB_CONFIG"].present?
