@@ -3,7 +3,6 @@ require "bundler/setup"
 Bundler.require
 require "active_support"
 require "active_model"
-require "shortcut_ruby"
 require "dotenv/load"
 require "awesome_print"
 

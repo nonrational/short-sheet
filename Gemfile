@@ -9,7 +9,6 @@ gem "hashie"
 gem "httparty"
 gem "pry"
 gem "rake"
-gem "shortcut_ruby"
 gem "sinatra"
 gem "table_print"
 

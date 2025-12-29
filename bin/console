@@ -8,7 +8,6 @@ require "irb"
 
 require "active_support"
 require "active_model"
-require "shortcut_ruby"
 require "dotenv/load"
 
 def load_paths!

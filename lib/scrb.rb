@@ -6,10 +6,6 @@ require "base64"
 
 module Scrb
   class << self
-    def shortcut
-      ::ShortcutRuby::Shortcut.new(api_key)
-    end
-
     def recent_epics
       recently_updated_epics + current_epics
     end

@@ -63,7 +63,7 @@ class Iteration < Shortcut::Base
     end
 
     def all
-      ::Scrb.shortcut.iterations.list[:content].map { |h| Iteration.new(h) }
+      ScrbClient.get("/iterations").map { |h| Iteration.new(h) }
     end
 
     def next(count)

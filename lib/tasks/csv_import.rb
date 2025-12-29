@@ -6,13 +6,9 @@ class CsvImport
   def save!
     CSV.foreach(filepath, headers: true) do |row|
       ap row
-      result = api.stories.create(row.to_h)
+      result = ScrbClient.post("/stories", body: row.to_h.to_json)
       binding.pry unless result[:code] == "201"
     end
-  end
-
-  def api
-    Scrb.shortcut
   end
 
   def filepath
